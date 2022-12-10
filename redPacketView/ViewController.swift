@@ -32,11 +32,20 @@ class ViewController: UIViewController {
             redPacketView.center.y = -CGFloat(i * 50)
             view.addSubview(redPacketView)
             
-            // 创建一个动画，让红包从屏幕外飘入
-            animator = UIViewPropertyAnimator(duration: 10, curve: .linear, animations: {
+            // 创建一个动画，让红包从屏幕外飘入，并添加摇摆效果
+            animator = UIViewPropertyAnimator(duration: 20, curve: .linear, animations: {
                 redPacketView.center.y = CGFloat.random(in: 1000..<1500)
             })
-            
+
+            // 添加摇摆效果
+            animator?.addAnimations({
+                // 在这里实现摇摆效果
+                // 例如，让红包图片沿着一个曲线运动
+                redPacketView.center.x = CGFloat.random(in: 0..<500)
+                redPacketView.center.y = CGFloat.random(in: 1000..<1500)
+            }, delayFactor: 0.1)
+
+
             animator?.isUserInteractionEnabled = true
             animator?.startAnimation()
         }
